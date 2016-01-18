@@ -1,0 +1,86 @@
+(1) The first stab at designing experiments I plan to design three experiments
+comprising of two algorithms - linear search and binary search, and one data
+structure - the binary heap. How do we go about technically designing these
+experiments so we meet the overall aims and objectives of the experiments?
+
+As we already figured out, we need the notion of STEPs and PHASEs in carrying
+out an experiment within a virtual environment. What is a step? What is a
+stage? How are they related to each other?
+
+Informally, a "phase" is a composite of activities that cognitively engage the
+learner. These activities are carried out in meaningful "steps." Each phase is
+a self-contained capsule communicating or imparting a well-defined piece of
+knowledge or fact. Thus, at the end of each phase, the learner would have
+gained a little more insight into the subject matter. An experiment, therefore,
+must have specific objectives, well-defined phases each consisting of steps or
+micro-activities composed in a meaningful manner.
+
+What are micro-activities or steps? Can we identify a few micro-activities so
+we intuitively understand their complexity in a general setting?
+
+A step/micro-activity may involve such simple acts as filling up a text box
+with a number or text, selecting from a bunch of options (check boxes, radio
+buttons), tapping on an UI element, moving a bunch of objects around the
+screen, answering a descriptive question, writing a very short snippet of code,
+writing a free-form narrative, writing an equation, watching a video, listening
+to an audio clip, observing a simple animation on the screen, reading text
+narratives that bubble around animations, simply staring at a screen capture,
+and much more!
+
+Therefore, to reiterate, we should map the aims and objectives of performing an
+experiment into various phases and micro-activities within each phase.
+
+From the technical architecture perspective, an experiment communicates the
+boundaries of phases as well as the boundaries of the micro-activities to the
+runtime context. We will define a protocol that ensures that the environment
+and the experiment collectively define a deterministic automaton. I already
+have some ideas how to do this; we need to refine them in the coming days.
+
+(2) Alright, can we be more specific? Can we provide concrete mappings?
+
+For instance, let's consider the binary search technique and organize it in the
+following phases and steps:
+
+Stage 1: Provide historical notes and the importance of the binary searching
+technique.  The steps may involve listening to an audio clip providing
+interesting historical facts about the inventors and the difficulties in
+getting the solution right. We may also employ comics, text captions and speech
+bubbles for narration.
+
+Stage 2: Demonstrate the binary search technique.  There may be four steps:
+play an audio clip; animate the working; animate with overlay of text balloons;
+play another audio clip to summarize the technique.
+
+Stage 3: State the preconditions.  This may consist of the following steps:
+play an audio clip about the precondition (input is a already sorted array);
+state the precondition in simple, informal text; show the formal definition of
+the percondition in text and show bubbles around key points; throw a simple
+quiz with three arrays and ask which arrays satisfy the preconditions;
+
+Stage 4: State the postconditions.  This may consist of the following steps:
+play an audio clip about the postcondition (array being intact, output variable
+containing the index of the key or -1); state the postcondition in simple,
+informal text; show the formal definition of the postcondition in text and show
+bubbles around key points; throw a simple quiz and ask which data satisfies the
+postconditions;
+
+Stage 5: State the loop invariant.  This may consist of the following steps:
+play an audio clip about the loop invariant; state the loop invariant in
+simple, informal text; show the formal definition of the invariant in text and
+show bubbles around key points; throw a quiz and ask which data satisfies the
+invariant;
+
+Stage 6: Animate the technique while also highlighting the precondtions,
+postconditions and invariants.
+
+Stage 7: Engage the learner in an interactive session.  Steps: ask the student
+to calculate the next mid-point and verify the answer; ask which halve of the
+input is thrown out of consideration for the next step; ask how many
+comparisons have been performed; ask how many comparisons may be required;
+animate the next couple steps; ask questions; generate random array and ask if
+it meets the precondition; etc.
+
+Stage 7: Quiz
+
+Stage 8: Summarize.  Steps: Play an audio clip; give references; point to
+open-source projects that use the binary search technique;
