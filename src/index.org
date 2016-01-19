@@ -1,23 +1,23 @@
 #+Title:  Lab as a Service
-#+Author: VLEAD
+#+Author: VLEAD(Virtual Labs Engineering and Architecture Division)
 #+EMAIL:  engg@vlead.ac.in
 #+DATE:   [2016-01-19 Tue]
 #+SETUPFILE: ./org-templates/level-0.org
 
 * Introduction
-  This is the architecture document of the platform that runs experiments.  The
-  document also provides a blue print on how an experiment is designed to
-  leverage the platform.
+  This is the architecture document of the platform that runs experiments,
+  henceforth called as VLEAD platform.  The document also provides a blue print
+  on how an experiment is designed to leverage the platform.
 
 * Structure of an Experiment
-  An experiment is a set of learning objective that are met by well-defined
+  An experiment is a set of learning objectives that are met by well-defined
   phases each consisting of steps or micro-activities composed in a meaningful
   manner.
 
-  Phase - a composite of activities that cognitively engage the learner. These
-  activities are carried out in meaningful "steps." Each phase is a
+  Phase - a composition of activities that cognitively engage the learner. These
+  activities are carried out in meaningful "steps."  Each phase is a
   self-contained capsule communicating or imparting a well-defined piece of
-  knowledge or fact. Thus, at the end of each phase, the learner would have
+  knowledge or fact.  Thus, at the end of each phase, the learner would have
   gained a little more insight into the subject matter.
 
   Step/Steps - Simple acts that allow the user to move forward as filling up a
@@ -40,13 +40,13 @@
 ** Slew of components
    The runtime computational environment of the experiment is a rich collection
    of active objects.  Objects are loosely coupled; they communicate by passing
-   messages to end points. The system is intended to be completely asynchronous
-   and loosely-coupled. Some implementation technologies may, however, restrict
-   the architecture in systematic ways. For example, a runtime may support only
+   messages to end points.  The system is intended to be completely asynchronous
+   and loosely-coupled.  Some implementation technologies may, however, restrict
+   the architecture in systematic ways.  For example, a runtime may support only
    single-threaded event-driven style of communication.
 
    There is a shared channel over which the Experiment, Phase, and Step objects
-   interact with other objects in the Environment. A typical virtual
+   interact with other objects in the Environment.  A typical virtual
    environment contains objects that are: runtime state trackers of the
    experiment, loggers, analytics monitors, components that assist in grading
    and evaluating learner's performance, reactive elements representing the UI
@@ -65,8 +65,7 @@
 
 ** Components
    - Hosted Content :: The resources could be either an NPTEL lecture hosted on
-                       youtube or a virtual lab hosted by VLEAD (Virtual Labs
-                       Engineering and Architecture Division) or any other
+                       youtube or a virtual lab hosted by VLEAD or any other
                        resource residing on the internet.
 
    - Service Layer :: This layer facilitates in finding a resource.
@@ -75,6 +74,28 @@
                       a MOOC using the component platform described in the
                       above section. 
 
+* Incorporating VLEAD platform in Open edX
+** Strategy  
+  Using the VLEAD platform allows a MOOC platform to persist the state of an
+  experiment for a user, gather analytics etc.   This is done by harnessing the
+  Xblock architecture of Open edX. 
+
+  The VLEAD platform sits inside am Xblock and the XBlock uses the REST API
+  exposed by the VLEAD platform to capture the necesasry information.  This
+  information is fed back to the Open edX platform since the communication
+  between an XBlock and the Open edX platform is seamless.
+
+  Google Course Builder can also use the same strategy since GCB supports
+  XBlocks.
+
+** Overview
+   #+BEGIN_HTML
+   <img src="https://docs.google.com/drawings/d/1x1HMLFl49E9K9CWUlWgAjTJCc6V3Ir-eJj2DRl00cAE/pub?w=800&h=620">
+   #+END_HTML
+
+
+
+  
 
 
 
