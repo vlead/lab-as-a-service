@@ -92,7 +92,8 @@
    #+BEGIN_HTML
    <img src="https://docs.google.com/drawings/d/1x1HMLFl49E9K9CWUlWgAjTJCc6V3Ir-eJj2DRl00cAE/pub?w=800&h=620">
    #+END_HTML
-
+   
+   [[https://docs.google.com/drawings/d/1x1HMLFl49E9K9CWUlWgAjTJCc6V3Ir-eJj2DRl00cAE/edit][edit the image]]
 
 
   
