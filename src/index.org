@@ -1,0 +1,81 @@
+#+Title:  Lab as a Service
+#+Author: VLEAD
+#+EMAIL:  engg@vlead.ac.in
+#+DATE:   [2016-01-19 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+
+* Introduction
+  This is the architecture document of the platform that runs experiments.  The
+  document also provides a blue print on how an experiment is designed to
+  leverage the platform.
+
+* Structure of an Experiment
+  An experiment is a set of learning objective that are met by well-defined
+  phases each consisting of steps or micro-activities composed in a meaningful
+  manner.
+
+  Phase - a composite of activities that cognitively engage the learner. These
+  activities are carried out in meaningful "steps." Each phase is a
+  self-contained capsule communicating or imparting a well-defined piece of
+  knowledge or fact. Thus, at the end of each phase, the learner would have
+  gained a little more insight into the subject matter.
+
+  Step/Steps - Simple acts that allow the user to move forward as filling up a
+  text box with a number or text, selecting from a bunch of options (check
+  boxes, radio buttons), tapping on an UI element, moving a bunch of objects
+  around the screen, answering a descriptive question, writing a very short
+  snippet of code, writing a free-form narrative, writing an equation, watching
+  a video, listening to an audio clip, observing a simple animation on the
+  screen, reading text narratives that bubble around animations, simply staring
+  at a screen capture, and much more!
+
+* Run Time Environment of an Experiment  
+** An Overview
+  #+BEGIN_HTML
+  <img src="https://docs.google.com/drawings/d/1lX2lKngP5ThDGvpmhmuPkqVI3o2odAVEoIcJgf0G0Xg/pub?w=800&h=620">
+  #+END_HTML
+
+   [[https://docs.google.com/drawings/d/1lX2lKngP5ThDGvpmhmuPkqVI3o2odAVEoIcJgf0G0Xg/edit][edit the image]]
+
+** Slew of components
+   The runtime computational environment of the experiment is a rich collection
+   of active objects.  Objects are loosely coupled; they communicate by passing
+   messages to end points. The system is intended to be completely asynchronous
+   and loosely-coupled. Some implementation technologies may, however, restrict
+   the architecture in systematic ways. For example, a runtime may support only
+   single-threaded event-driven style of communication.
+
+   There is a shared channel over which the Experiment, Phase, and Step objects
+   interact with other objects in the Environment. A typical virtual
+   environment contains objects that are: runtime state trackers of the
+   experiment, loggers, analytics monitors, components that assist in grading
+   and evaluating learner's performance, reactive elements representing the UI
+   and UX of the phases and steps in an experiment, and such.
+
+   The platform that facilitates such a run time environment exposes REST API
+   that is used by any other MOOC platform to build a MOOC.
+
+* Building the content
+** An Overview
+   #+BEGIN_HTML
+   <img src="https://docs.google.com/drawings/d/1IOCExYO9bDqxMZ4JY9fWhJ9cUiF1tn35icFzpIGefvc/pub?w=800&h=620">
+   #+END_HTML
+
+   [[https://docs.google.com/drawings/d/1IOCExYO9bDqxMZ4JY9fWhJ9cUiF1tn35icFzpIGefvc/edit][edit the image]]
+
+** Components
+   - Hosted Content :: The resources could be either an NPTEL lecture hosted on
+                       youtube or a virtual lab hosted by VLEAD (Virtual Labs
+                       Engineering and Architecture Division) or any other
+                       resource residing on the internet.
+
+   - Service Layer :: This layer facilitates in finding a resource.
+
+   - MOOC Plarform :: Either Open edX or Google Course Builder is able to build
+                      a MOOC using the component platform described in the
+                      above section. 
+
+
+
+
+   
