@@ -5,9 +5,10 @@
 #+SETUPFILE: ./org-templates/level-0.org
 
 * Introduction
-  This is the architecture document of the platform that runs experiments,
-  henceforth called as =Vlabs Experiment Runtime=.  The document also provides a blue print
-  on how an experiment is designed to leverage the platform.
+  This is the architecture document of the runtime environment in which the
+  experiments are executed, henceforth called as =Vlabs Experiment Runtime=.
+  The document also provides a blue print on how an experiment is designed to
+  leverage this runtime environment.
 
 * Structure of an Experiment
   An experiment is a set of learning objectives that are met by well-defined
