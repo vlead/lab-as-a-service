@@ -1,4 +1,4 @@
-#+Title:  Experiment as a Service (EaaS)
+#+Title:  Virtual Labs as a Service (VLaaS)
 #+Author: VLEAD(Virtual Labs Engineering and Architecture Division)
 #+EMAIL:  engg@vlead.ac.in
 #+DATE:   [2016-01-19 Tue]
