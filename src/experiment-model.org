@@ -1,0 +1,121 @@
+#+title: Experiment as a system
+#+Author: VLEAD(Virtual Labs Engineering and Architecture Division)
+#+EMAIL:  engg@vlead.ac.in
+#+DATE:   [2016-01-19 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+
+
+* Introduction
+
+We wish to consider an example experiment as a formal Tabuada
+system.
+
+** Example
+Consider the experiment where the student plays an audio
+some number of times and then a video some number of times
+and is done.   The state of the experiment consists of the
+number of audio and video runs.   The persistent state of
+consists of history of all past experiments. 
+
+
+** Spaces
+   - Loc = {init, audio, video, end}
+   - Events = {next, play, done} 
+
+** State variables
+
+|----------+--------------+--------------------------------+------------+---|
+| Variable | Type         | Description                    | Scope      |   |
+|----------+--------------+--------------------------------+------------+---|
+| n        | N            | id of current experiment run   | persistent |   |
+|----------+--------------+--------------------------------+------------+---|
+| a        | N            | #audio runs in current exp run | volatile   |   |
+|----------+--------------+--------------------------------+------------+---|
+| v        | N            | #video runs in current exp run | volatile   |   |
+|----------+--------------+--------------------------------+------------+---|
+| l        | L            | User state  in current         | volatile   |   |
+|----------+--------------+--------------------------------+------------+---|
+| es       | N->(a:N,v:N) | array of past exp runs         | persistent |   |
+|----------+--------------+--------------------------------+------------+---|
+
+
+
+** Initial value of state variables
+ [n, a, v, l, es] = [0, 0, 0, init, empty]
+
+Experiments are numbered starting from 0. 
+
+** Dynamics
+#+CAPTION: State diagram of the experiment
+#+NAME: fig:STATE-DIAGRAM
+
+[[./exp.jpg]]
+
+The dynamics shows only variables that get updated.
+|---+------------------+-------+---------------------------+---+---|
+|   | state vars       | event | new values of             |   |   |
+|   |                  |       | state vars                |   |   |
+|---+------------------+-------+---------------------------+---+---|
+| 1 | init             | next  | audio                     |   |   |
+|---+------------------+-------+---------------------------+---+---|
+| 2 | [audio, a]       | play  | [audio, a+1]              |   |   |
+|---+------------------+-------+---------------------------+---+---|
+| 3 | audio            | next  | video                     |   |   |
+|---+------------------+-------+---------------------------+---+---|
+| 4 | [video, v]       | play  | [video, v+1]              |   |   |
+|---+------------------+-------+---------------------------+---+---|
+| 5 | [video,a,v,n,es] | done  | [end,0,0,n+1,es[n:(a,v)]] |   |   |
+|---+------------------+-------+---------------------------+---+---|
+Note that es[i:v] denotes updating the value at the ith
+index of the vector v. 
+
+** Remarks
+
+In the above dynamics, the variables a and v are volatile,
+i.e., they are persisted only once an experiment is done,
+not during an experiment.    In order to persist the values
+at all times, including during an experiment, the rules in
+the dynamics need to be changed.
+
+
+* Experiment dynamics with fine-grained persistence
+
+** State variables
+
+The following state variables need to change
+
+|----------+------------------+--------------------------------+------------+---|
+| Variable | Type             | Description                    | Scope      |   |
+|----------+------------------+--------------------------------+------------+---|
+| es       | N->(l:L,a:N,v:N) | array of past exp runs         | persistent |   |
+|----------+------------------+--------------------------------+------------+---|
+
+The codomain of es also contains the location of the current
+experiment.
+
+** New dynamics
+
+|---+------------------+-------+----------------------------------+---+---|
+|   | state vars       | event | new values of                    |   |   |
+|   |                  |       | state vars                       |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+| 1 | [init,es]        | next  | [audio, es[n:(audio,_,_)]        |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+| 2 | [audio, a,es]    | play  | [audio, es[n:(_,a+1,_)]          |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+| 3 | [audio, es]      | next  | [video,es[n:(video,_,_)]         |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+| 4 | [video, v, es]   | play  | [video, es[n:(_,_,v+1)]          |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+| 5 | [video,a,v,n,es] | done  | [end,0,0,n+1,                    |   |   |
+|   |                  |       | es[n:(end,_,_)][n+1:(init,0,0)]] |   |   |
+|---+------------------+-------+----------------------------------+---+---|
+
+** Remarks
+
+Note that even more fine grained experiment could be stored,
+including an event/timestamp log.  From this, one could
+calculate whether the student heard the entire audio or not,
+etc.
+
+
